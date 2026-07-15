@@ -188,9 +188,8 @@ This project was developed for educational purposes as part of a university cour
 
 **George Tshabangu**
 
-- GitHub: https://github.com/yourusername
-- Email: your-email@example.com
+- GitHub: https:https://github.com/Georgetshabangu-alt/Trackserv-
+- Email: Maleselakarabo11@gmail.com 
 
 ---
 
-⭐ If you found this project interesting, don't forget to give it a star!
