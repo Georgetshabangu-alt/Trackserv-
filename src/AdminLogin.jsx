@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Logo from "./Logo";
 import "./AdminLogin.css";
 
 const initialAdminState = {
@@ -53,18 +54,24 @@ function AdminLogin() {
   return (
     <div className="admin-auth-page">
       <div className="admin-auth-card" role="main" aria-labelledby="admin-login-title">
-        <div className="admin-lozenge">
-          <span className="admin-lozenge-dot" aria-hidden="true" />
-          <span className="admin-lozenge-text">Administrator Portal</span>
-        </div>
+        <div className="admin-auth-header">
+          <Logo />
 
-        <h1 id="admin-login-title" className="admin-auth-title">
-          Secure Admin Login
-        </h1>
-        <p className="admin-auth-copy">
-          Sign in with your municipal administrator credentials to manage service reports, approvals,
-          and internal dashboards.
-        </p>
+          <div>
+            <div className="admin-lozenge">
+              <span className="admin-lozenge-dot" aria-hidden="true" />
+              <span className="admin-lozenge-text">Administrator Portal</span>
+            </div>
+
+            <h1 id="admin-login-title" className="admin-auth-title">
+              Secure Admin Login
+            </h1>
+            <p className="admin-auth-copy">
+              Sign in with your municipal administrator credentials to manage service reports, approvals,
+              and internal dashboards.
+            </p>
+          </div>
+        </div>
 
         <form className="admin-auth-form" onSubmit={handleSubmit} noValidate>
           <div className="admin-field-group">

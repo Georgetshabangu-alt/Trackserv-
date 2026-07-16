@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import Logo from "./Logo";
 import "./UserLogin.css";
 
 const initialFormState = {
@@ -63,10 +64,7 @@ function UserLogin() {
     <div className="user-auth-page">
       <div className="user-auth-card" role="main" aria-labelledby="user-login-title">
         <div className="user-auth-header">
-          <div className="user-branding">
-            <span className="user-brand-tag">TrackServe</span>
-            <span className="user-brand-caption">Municipal Issue Reporting</span>
-          </div>
+          <Logo />
 
           <div>
             <h1 id="user-login-title">User Login</h1>

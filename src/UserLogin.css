@@ -1,14 +1,31 @@
 :root {
-  --primary: #1e4a88;
-  --primary-soft: #dbe9ff;
-  --accent: #2a9d8f;
-  --accent-soft: #e2f5f0;
-  --surface: #ffffff;
-  --surface-muted: #f4f7fb;
-  --border: #d6e1ee;
-  --text-primary: #102a43;
-  --text-secondary: #52667a;
-  --shadow: 0 28px 80px rgba(14, 50, 90, 0.08);
+  --bg: #f4f8fd;
+  --panel: #ffffff;
+  --surface: #f8fbff;
+  --border: rgba(76, 125, 255, 0.16);
+  --text: #0f2039;
+  --muted: #5d7087;
+  --accent: #1d60c4;
+  --accent-soft: #e5f1ff;
+  --success: #227c59;
+  --shadow: 0 32px 70px rgba(18, 41, 96, 0.12);
+}
+
+html {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top left, rgba(29, 102, 198, 0.16), transparent 28%),
+    radial-gradient(circle at bottom right, rgba(34, 135, 103, 0.14), transparent 22%),
+    linear-gradient(180deg, #f8fbff 0%, #e9f2fd 100%);
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .user-auth-page {
@@ -16,19 +33,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 32px;
-  background: radial-gradient(circle at top left, rgba(42, 157, 143, 0.12), transparent 24%),
-    radial-gradient(circle at bottom right, rgba(30, 74, 136, 0.14), transparent 20%),
-    #f4f9ff;
+  padding: 24px;
 }
 
 .user-auth-card {
-  width: min(480px, 100%);
-  background: var(--surface);
-  border-radius: 28px;
+  width: min(500px, 100%);
+  background: var(--panel);
+  border-radius: 30px;
+  border: 1px solid rgba(255, 255, 255, 0.92);
   box-shadow: var(--shadow);
-  border: 1px solid rgba(36, 99, 173, 0.08);
-  padding: 40px 36px;
+  padding: 38px 38px 34px;
+  max-width: 520px;
 }
 
 .user-auth-header {
@@ -44,33 +59,38 @@
 }
 
 .user-brand-tag {
-  color: var(--primary);
-  font-weight: 800;
+  font-size: 20px;
+  font-weight: 700;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  font-size: 0.8rem;
+  color: #1b4da1;
 }
 
 .user-brand-caption {
-  color: var(--text-secondary);
-  font-size: 0.92rem;
+  font-size: 15px;
+  font-weight: 400;
+  color: #66758d;
 }
 
 .user-auth-header h1 {
   margin: 0;
-  font-size: 2.1rem;
-  color: var(--text-primary);
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text);
 }
 
 .user-subtitle {
   margin: 0;
-  color: var(--text-secondary);
-  line-height: 1.7;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #4f627a;
 }
 
 .user-auth-form {
   display: grid;
-  gap: 20px;
+  gap: 22px;
 }
 
 .user-field-group {
@@ -79,26 +99,30 @@
 }
 
 .user-field-group label {
-  color: var(--text-primary);
-  font-size: 0.95rem;
+  font-size: 15px;
   font-weight: 600;
+  color: #243a5d;
 }
 
 .user-field-group input {
   width: 100%;
-  border-radius: 16px;
+  padding: 16px 18px;
+  font-size: 16px;
+  color: var(--text);
+  background: var(--surface);
   border: 1px solid var(--border);
-  background: var(--surface-muted);
-  color: var(--text-primary);
-  padding: 14px 16px;
-  font-size: 1rem;
+  border-radius: 16px;
   outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.user-field-group input::placeholder {
+  color: #8d9fb3;
 }
 
 .user-field-group input:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(30, 74, 136, 0.1);
+  border-color: rgba(29, 102, 198, 0.45);
+  box-shadow: 0 0 0 4px rgba(29, 102, 198, 0.12);
   background: #fff;
 }
 
@@ -113,17 +137,22 @@
   margin-left: auto;
   border: none;
   background: transparent;
-  color: var(--accent);
-  font-size: 0.95rem;
+  color: #1d60c4;
+  font-size: 15px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.password-toggle:hover,
+.password-toggle:focus-visible {
+  text-decoration: underline;
 }
 
 .user-options-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  gap: 16px;
   flex-wrap: wrap;
 }
 
@@ -131,78 +160,106 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  font-size: 0.95rem;
-  color: var(--text-secondary);
+  font-size: 15px;
+  color: #4f627a;
 }
 
 .checkbox-label input {
-  width: 16px;
-  height: 16px;
-  accent-color: var(--accent);
+  width: 18px;
+  height: 18px;
+  accent-color: #1d60c4;
 }
 
 .forgot-link {
-  color: var(--primary);
-  text-decoration: none;
-  font-size: 0.95rem;
+  color: #1d60c4;
+  font-size: 15px;
   font-weight: 600;
+  text-decoration: none;
 }
 
-.forgot-link:hover {
+.forgot-link:hover,
+.forgot-link:focus-visible {
   text-decoration: underline;
 }
 
 .user-auth-button {
   width: 100%;
-  background: linear-gradient(135deg, var(--primary), var(--accent));
+  padding: 16px 18px;
+  font-size: 17px;
+  font-weight: 600;
   color: #ffffff;
+  background: linear-gradient(135deg, #1d60c4 0%, #21a17b 100%);
   border: none;
   border-radius: 16px;
-  padding: 16px 18px;
-  font-size: 1rem;
-  font-weight: 700;
   cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 18px 30px rgba(42, 157, 143, 0.18);
+  transition: transform 0.24s ease, box-shadow 0.24s ease, opacity 0.24s ease;
+  box-shadow: 0 18px 30px rgba(29, 102, 198, 0.18);
 }
 
 .user-auth-button:hover:not(:disabled) {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 22px 34px rgba(29, 102, 198, 0.22);
+}
+
+.user-auth-button:focus-visible {
+  outline: 3px solid rgba(29, 102, 198, 0.35);
+  outline-offset: 3px;
 }
 
 .user-auth-button:disabled {
-  opacity: 0.72;
+  opacity: 0.78;
   cursor: not-allowed;
+  box-shadow: none;
 }
 
 .field-error {
-  color: #b91c1c;
-  font-size: 0.9rem;
+  color: #c72f2f;
+  font-size: 14px;
 }
 
 .user-register-line {
-  margin: 0;
-  color: var(--text-secondary);
+  margin: 24px 0 0;
+  font-size: 15px;
   text-align: center;
-  font-size: 0.96rem;
+  color: #5d7087;
 }
 
 .user-register-line a {
-  color: var(--primary);
+  color: #1d60c4;
   font-weight: 700;
   text-decoration: none;
 }
 
-.user-register-line a:hover {
+.user-register-line a:hover,
+.user-register-line a:focus-visible {
   text-decoration: underline;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 720px) {
   .user-auth-card {
-    padding: 28px 24px;
+    width: min(100%, 100%);
+    padding: 30px 24px 28px;
   }
 
   .user-auth-header h1 {
-    font-size: 1.8rem;
+    font-size: 34px;
+  }
+}
+
+@media (max-width: 520px) {
+  .user-auth-page {
+    padding: 18px;
+  }
+
+  .user-auth-card {
+    border-radius: 24px;
+  }
+
+  .user-auth-form {
+    gap: 18px;
+  }
+
+  .user-auth-button {
+    padding: 14px 16px;
   }
 }
