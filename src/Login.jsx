@@ -106,11 +106,6 @@ function Login() {
           New to TrackServe?
           <Link to="/register">Create account</Link>
         </p>
-
-        <p className="register-text">
-          Administrator?
-          <Link to="/admin-login">Admin login</Link>
-        </p>
       </div>
     </div>
   );

@@ -1,95 +1,137 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
-import "./styles.css";
+import "./AdminLogin.css";
+
+const initialAdminState = {
+  identifier: "",
+  password: "",
+};
+
+const initialAdminErrors = {
+  identifier: "",
+  password: "",
+};
 
 function AdminLogin() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState(initialAdminState);
+  const [errors, setErrors] = useState(initialAdminErrors);
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [submitting, setSubmitting] = useState(false);
 
   const validate = () => {
-    const newErrors = {};
+    const nextErrors = {};
 
-    if (!email.trim()) {
-      newErrors.email = "Admin email is required";
+    if (!form.identifier.trim()) {
+      nextErrors.identifier = "Admin username or email is required.";
     }
 
-    if (!password.trim()) {
-      newErrors.password = "Password is required";
+    if (!form.password.trim()) {
+      nextErrors.password = "Password is required.";
     }
 
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
   };
 
-  const handleAdminLogin = (e) => {
-    e.preventDefault();
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setForm((current) => ({ ...current, [name]: value }));
+    setErrors((current) => ({ ...current, [name]: "" }));
+  };
 
-    if (validate()) {
-      console.log({ email, password });
-      alert("Admin login successful");
-    }
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    if (!validate()) return;
+
+    setSubmitting(true);
+    await new Promise((resolve) => setTimeout(resolve, 900));
+    setSubmitting(false);
+
+    alert("Admin login successful. Welcome to the secure dashboard.");
+    setForm(initialAdminState);
   };
 
   return (
-    <div className="login-page">
-      <div className="login-card">
-        <div className="logo">
-          <h1>TrackServe Admin</h1>
-          <p>Administrator access for service management</p>
+    <div className="admin-auth-page">
+      <div className="admin-auth-card" role="main" aria-labelledby="admin-login-title">
+        <div className="admin-lozenge">
+          <span className="admin-lozenge-dot" aria-hidden="true" />
+          <span className="admin-lozenge-text">Administrator Portal</span>
         </div>
 
-        <div className="header-block">
-          <h2>Admin portal sign in</h2>
-          <p className="subtitle">
-            Use your administrator credentials to access the dashboard and management tools.
-          </p>
-        </div>
+        <h1 id="admin-login-title" className="admin-auth-title">
+          Secure Admin Login
+        </h1>
+        <p className="admin-auth-copy">
+          Sign in with your municipal administrator credentials to manage service reports, approvals,
+          and internal dashboards.
+        </p>
 
-        <form className="auth-form" onSubmit={handleAdminLogin}>
-          <div className="input-group">
-            <label htmlFor="admin-email">Admin email</label>
+        <form className="admin-auth-form" onSubmit={handleSubmit} noValidate>
+          <div className="admin-field-group">
+            <label htmlFor="identifier">Admin username or email</label>
             <input
-              id="admin-email"
-              type="email"
-              placeholder="admin@trackserve.local"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              id="identifier"
+              name="identifier"
+              type="text"
+              placeholder="admin@example.gov"
+              value={form.identifier}
+              onChange={handleChange}
+              aria-invalid={Boolean(errors.identifier)}
+              aria-describedby={errors.identifier ? "identifier-error" : undefined}
+              autoComplete="username"
             />
-            {errors.email && <span className="error">{errors.email}</span>}
+            {errors.identifier && (
+              <span className="field-error" id="identifier-error">
+                {errors.identifier}
+              </span>
+            )}
           </div>
 
-          <div className="input-group">
+          <div className="admin-field-group">
             <label htmlFor="admin-password">Password</label>
-            <div className="password-box">
+            <div className="admin-password-row">
               <input
                 id="admin-password"
+                name="password"
                 type={showPassword ? "text" : "password"}
-                placeholder="Admin password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
+                placeholder="Enter your secure password"
+                value={form.password}
+                onChange={handleChange}
+                aria-invalid={Boolean(errors.password)}
+                aria-describedby={errors.password ? "password-error" : undefined}
+                autoComplete="current-password"
               />
               <button
                 type="button"
-                className="show-btn"
+                className="admin-password-toggle"
                 onClick={() => setShowPassword((current) => !current)}
+                aria-label={showPassword ? "Hide password" : "Show password"}
               >
                 {showPassword ? "Hide" : "Show"}
               </button>
             </div>
-            {errors.password && <span className="error">{errors.password}</span>}
+            {errors.password && (
+              <span className="field-error" id="password-error">
+                {errors.password}
+              </span>
+            )}
           </div>
 
-          <button className="login-btn" type="submit">
-            Sign in as Admin
+          <div className="admin-actions">
+            <div />
+            <a className="admin-forgot" href="#">
+              Forgot password?
+            </a>
+          </div>
+
+          <button className="admin-auth-button" type="submit" disabled={submitting}>
+            {submitting ? "Signing in..." : "Login"}
           </button>
         </form>
 
-        <p className="register-text">
-          Back to user login?
-          <Link to="/login">User login</Link>
-        </p>
+        <div className="admin-notice">
+          Only authorized municipal administrators may use this portal. User registration is not available here.
+        </div>
       </div>
     </div>
   );
